@@ -3,7 +3,7 @@ from tkinter import messagebox
 import random
 from PIL import ImageTk, Image
 from tkinter import ttk
-import main
+# import main
 
 root = Tk()
 root.geometry("460x500")
@@ -24,10 +24,12 @@ lbAccHolder.place(x=80, y=120)
 entyAccHolder = Entry(root, width=30)
 entyAccHolder.place(x=80, y=145)
 
+
 lbAccNumber = Label(root, text='Account Number', bg='#f48c06')
 lbAccNumber.place(x=80, y=180)
 entyAccNumber = Entry(root, width=30)
 entyAccNumber.place(x=80, y=200)
+
 
 lbBank = Label(root, text='Bank', bg='#f48c06')
 lbBank.place(x=80, y=235)

@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 from PIL import ImageTk, Image
-import main
+# import main
 
 root = Tk()
 root.geometry("650x450")
@@ -15,8 +15,10 @@ logo = ImageTk.PhotoImage(resize)
 lbpic = Label(root, image=logo, bg='#f48c06')
 lbpic.place(x=540, y=5)
 
+
 pic = Image.open("welcome.png")
 resized = pic.resize((260, 350), Image.ANTIALIAS)
+
 
 lbTitle = Label(root, text='LOG IN', font='Times 30', bg='#f48c06')
 lbTitle.place(x=380, y=40)
@@ -29,6 +31,7 @@ lbPlayer = Label(root, text='Player ID', bg='#f48c06')
 lbPlayer.place(x=330, y=120)
 entyPlayer = Entry(root, width=30)
 entyPlayer.place(x=330, y=145)
+
 
 lbID = Label(root, text='ID Number', bg='#f48c06')
 lbID.place(x=330, y=180)

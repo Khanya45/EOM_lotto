@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 from PIL import ImageTk, Image
-import main
+# import main
 
 root = Tk()
 root.geometry("455x520")
@@ -50,12 +50,14 @@ entyWin_5.place(x=250, y=180)
 entyWin_6 = Entry(root, width=5)
 entyWin_6.place(x=300, y=180)
 
+
 lbUser_lotto_num = Label(root, text='Number of matches:', bg='#f48c06')
 lbUser_lotto_num.place(x=50, y=260)
 
 #  An entry for number of matches
 entyMatches = Entry(root, width=7)
 entyMatches.place(x=50, y=290)
+
 
 lbUser_lotto_num = Label(root, text='Prize:', bg='#f48c06')
 lbUser_lotto_num.place(x=250, y=260)
@@ -65,6 +67,7 @@ entyMatches = Entry(root, width=10)
 entyMatches.place(x=250, y=290)
 
 #  button for lottery generator
+
 btnPlay = Button(root, text='PLAY', width=10, borderwidth=3)
 btnPlay.place(x=70, y=390)
 
@@ -78,6 +81,7 @@ btnReset.place(x=200, y=390)
 
 #  button for exiting
 btnExit = Button(root, text='EXIT', font='bold', borderwidth=7)
+
 btnExit.place(x=150, y=470)
 
 
