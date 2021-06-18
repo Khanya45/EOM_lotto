@@ -2,7 +2,28 @@ from tkinter import *
 from tkinter import messagebox
 import random
 from PIL import ImageTk, Image
-# import main
+import rsaidnumber
+
+def exit():
+    root.destroy()
+
+
+def playerid_validation(playerID):
+    if playerID.isdigit() == False or len(playerID) != 13:
+        messagebox.showerror("", "Invalid player ID")
+
+
+def id_validation(id):
+    id_number = ""
+    try:
+        id_number = rsaidnumber.parse(id)
+    except:
+        messagebox.showerror("", "Invalid ID number")
+    if id_number.valid:
+            messagebox.showerror("", "valid ID number")
+            root.destroy()
+            import play
+
 
 root = Tk()
 root.geometry("650x450")
@@ -38,10 +59,10 @@ lbID.place(x=330, y=180)
 entyID = Entry(root, width=30)
 entyID.place(x=330, y=200)
 
-btnEnter = Button(root, text='ENTER', width=20, borderwidth=3)
+btnEnter = Button(root, text='ENTER', width=20, borderwidth=3, command=lambda: [playerid_validation(entyPlayer.get()), id_validation(entyID.get())])
 btnEnter.place(x=330, y=235)
 
-btnExit = Button(root, text='EXIT', borderwidth=7)
+btnExit = Button(root, text='EXIT', borderwidth=7, command=exit)
 btnExit.place(x=330, y=300)
 
 root.mainloop()
