@@ -63,9 +63,11 @@ class clsPlay:
          #  An entry for number of matches
         self.entyPrize = Entry(root, width=10)
         self.entyPrize.place(x=220, y=290)
-         #  button for lottery generator  , self.sound(self.entyPrize.get())
+        
+         #  button for lottery generator  
         self.btnPlay = Button(root, text='PLAY', width=10, borderwidth=3, command=lambda: [self.lottogenerator(self.player_numbers()), self.savegame()])
         self.btnPlay.place(x=50, y=390)
+        
         #  button for playing again/clearing the entries
         self.btnReset = Button(root, text='RESET', width=10, borderwidth=3, command=self.ResetBtn)
         self.btnReset.place(x=175, y=390)
@@ -135,7 +137,8 @@ class clsPlay:
     def exit(self):
         root.destroy()
 
-
+================================   Code for generating lotto numbers and playing sound    ======================================
+        
     def lottogenerator(self, userLotto):
         lotto_prizes = {0: 0, 1: 0, 2: 20, 3: 100.50, 4: 2384, 5: 8584, 6: 10000000}
         count = 0
@@ -160,7 +163,7 @@ class clsPlay:
         else:
             playsound('Fail Sound Effect.mp3')
 
-
+=========================================================================================================
 
 
 
