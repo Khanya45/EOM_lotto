@@ -111,6 +111,11 @@ lbEmail.place(x=330, y=180)
 entyEmail = Entry(root, width=30)
 entyEmail.place(x=330, y=200)
 
+def write_email():
+    with open("sets.txt", "a") as file:
+        file.write(entyEmail.get())
+
+
 
 lbAddress = Label(root, text='Address', bg='#f48c06')
 lbAddress.place(x=330, y=235)
@@ -124,7 +129,7 @@ entyID = Entry(root, width=30)
 entyID.place(x=330, y=310)
 
 
-btnEnter = Button(root, text='ENTER', width=20, borderwidth=3, command=lambda: [writeon_file(), playerid_generator(), validation(entyID.get(), entyAddress.get(), entyName.get()), id_validation(entyID)])
+btnEnter = Button(root, text='ENTER', width=20, borderwidth=3, command=lambda: [writeon_file(), write_email(), playerid_generator(), validation(entyID.get(), entyAddress.get(), entyName.get()), id_validation(entyID)])
 btnEnter.place(x=355, y=370)
 
 

@@ -6,7 +6,8 @@ from tkinter import ttk
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-# import sign_in
+import requests
+
 
 root = Tk()
 root.geometry("460x500")
@@ -18,7 +19,7 @@ def exit():
     root.destroy()
 
 
-def email_validation(email):
+def send_email(email):
     try:
         sender_email_id = 'lottowinners957@gmail.com'
         receiver_email_id = email
@@ -44,6 +45,29 @@ def email_validation(email):
 def validation(accHolder, accNum):
     if (len(accHolder) == 0) or (len(accNum == 0)) or (accNum < 9):
         messagebox.showerror("", "Invalid info. Please try again")
+
+
+# with open("sets.txt", "r") as file:
+#     total = 0
+#     for line in file:
+#         pos = line.find(":")+1
+#         line_lenght = len(line)
+#         prize = float(line[pos:line_lenght])
+#         total += prize
+
+
+lbCurrency = Label(root, text="Choose currency(USD)", bg='#f48c06')
+lbCurrency.place(x=80, y=290)
+cbCurrency = ttk.Combobox(root)
+cbCurrency.place(x=80, y=310, width=70)
+response = requests.get('https://v6.exchangerate-api.com/v6/fac9f0aa288dff6d0a7c7a88/latest/USD')
+text = response.json()
+conversion_rates = text['conversion_rates'].keys()
+# for i in conversion_rates:
+rates = list(conversion_rates)
+cbCurrency['values'] = rates
+# dict_Currency = total * text['conversion_rates'][cbCurrency.get()]
+
 
 
 pic1 = Image.open("logo.png")
@@ -75,10 +99,22 @@ cbBank.place(x=80, y=255)
 
 
 btnSubmit = Button(root, text='SUBMIT', width=20, borderwidth=3, command=exit)
-btnSubmit.place(x=80, y=300)
+btnSubmit.place(x=80, y=370)
+
+def email():
+    with open("sets.txt", "r") as pfile:
+        count1 = 0
+        for line in pfile:
+            if count1 == 1:
+                break
+            else:
+               email = line
+        count1 += 1
+    return email
+
 
 # lambda: [email_validation(sign_in.entyEmail.get()), validation(entyAccHolder.get(), entyAccNumber.get())]
-btnExit = Button(root, text='EXIT', borderwidth=7, command=exit)
-btnExit.place(x=80, y=390)
+btnExit = Button(root, text='EXIT', borderwidth=7, command=lambda: [send_email(email()), validation(entyAccHolder.get(), entyAccNumber.get())])
+btnExit.place(x=80, y=420)
 
 root.mainloop()
