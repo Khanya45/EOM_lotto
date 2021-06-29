@@ -59,10 +59,6 @@ def playerid_generator():
 #  ----------- VALIDATION --------------
 def email_validation(email):
     try:
-        # if ("@" not in email) or ("." not in email):
-        #     messagebox.showerror("", "Invalid email")
-        # else:
-        #     messagebox.showinfo("", "Valid email")
         sender_email_id = 'khanyagope93@gmail.com'
         receiver_email_id = email
         password = "GETRICHWITHLOTTO"
@@ -94,6 +90,18 @@ def playerid_validation(playerID):
     if playerID.isdigit() == False or len(playerID) != 13:
         messagebox.showerror("", "Invalid player ID")
 
+
+#  -------- FINDING PLAYER ACCOUNT
+def findplayer(playerid):
+    with open("playerDetails.txt", "r") as file:
+        for line in file:
+            if line.find(playerid):
+                pass
+            else:
+                messagebox.showerror("", "Account not found")
+
+
+
 #  ---------------------------------- CLAIM UNIT -----------------------------------
 
 #  ----------- VALIDATION --------------
@@ -111,24 +119,27 @@ def validation(accNumber, accHolder, bank):
 
 #  ---------- ID NUMBER VALIDATION --------
 
-def id_validation():
-    id_number = rsaidnumber.parse('0210160451089')
-    if id_number.valid == False:
+def id_validation(id):
+    try:
+        id_number = rsaidnumber.parse(id)
+        if id_number.valid:
+            messagebox.showerror("", "Valid ID number")
+    except:
         messagebox.showerror("", "Invalid ID number")
 
 
-# id_validation()
+# id_validation('0210160451089')
 
 #  ------------------- FILE HANDLING --------------------
 
 #  writing all the player's details and lotto results on a text file
 def writeon_file(name, playerid, prize, sets, contacts, id):
-    with open("playerDetails.txt", "w") as file:
+    with open("playerDetails.txt", "a") as file:
         text = [name, playerid, sets, prize, contacts]
         file.writelines(text)
 
 
-writeon_file("khanya", "8765675432123", "675", "45676545", "khanyagope93@gmail.com", "0210160451089")
+# writeon_file("khanya", "8765675432123", "675", "45676545", "khanyagope93@gmail.com", "0210160451089")
 
 
 def readfile(playerid, idnumber):
@@ -141,5 +152,81 @@ def readfile(playerid, idnumber):
                 messagebox.showerror("", "Your account is not found")
 
 
-readfile("87656732123", "0210160451089")
+# readfile("87656732123", "0210160451089")
+
+#  ---------------- RESET BUTTON -------------------------
+def ResetBtn(list):
+    with open("sets.txt", "w") as file:
+        for i in list:
+            file.write(i)
+
+
+#  --------------- PLAY BUTTON -----------
+def playbtn():
+    with open("sets.txt", "r") as file:
+        for line in file:
+            # for number in line:
+            sets = line.split()
+
+
+def send_email(email):
+    try:
+        sender_email_id = 'lottowinners957@gmail.com'
+        receiver_email_id = email
+        password = "GETRICHWITHLOTTO"
+        subject = "Greetings"
+        msg = MIMEMultipart()
+        msg['From'] = sender_email_id
+        msg['To'] = receiver_email_id
+        msg['Subject'] = subject
+        body = "Your account is verified\n"
+        msg.attach(MIMEText(body, 'plain'))
+        text = msg.as_string()
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login(sender_email_id, password)
+        s.sendmail(sender_email_id, receiver_email_id, text)
+        s.quit()
+    except ValueError:
+        messagebox.showinfo("", "Invalid email")
+
+
+# send_email('khanyagope93@gmail.com')
+
+def player_numbers():
+    list1 = [234, 234, 234, 234, 2343, 4]
+    return list1
+
+def store_sets():
+        sets = [player_numbers()]
+        if len(sets) > 3:
+            sets.pop(-1)
+            messagebox.showerror("", "Cannot play more than 3 sets")
+            # btnReset["state"] = "DISABLED"
+
+#  get prize from textfile
+# with open("playerDetails.txt", "r") as file:
+#     for line in file:
+#         pos1 = line.find("Prize1")
+#         pos2 = line.find("Prize2")
+#         pos3 = line.find("Prize3")
+#     total = line[pos1+1] + line[pos2+1] + line[pos3+1])
+
+with open("sets.txt", "w") as sfile:
+    sfile.write(f'{player_numbers()}:{prize.get()}\n')
+
+
+with open("sets.txt", "r") as file:
+    count = 0
+    total = 0
+    for line in file:
+        count += 1
+        pos = line.find(":")+1
+        line_lenght = len(line)
+        prize = line[pos:line_lenght]
+        total += prize
+
+    if count == 3:
+        btnReset["state"] = "DISABLED"
+
 
